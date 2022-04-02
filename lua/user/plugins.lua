@@ -48,6 +48,9 @@ return packer.startup(function(use)
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "lunarvim/darkplus.nvim"
+  use "morhetz/gruvbox"
+  use "catppuccin/nvim"
+  -- use { 'catppuccin/nvim', branch = 'dev-remaster',} -- if I do this I still don't see the other flavors
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
@@ -63,6 +66,14 @@ return packer.startup(function(use)
     -- Telescope
   use "nvim-telescope/telescope.nvim"
   use 'nvim-telescope/telescope-media-files.nvim'
+
+    -- Treesitter
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+  }
+  use "p00f/nvim-ts-rainbow"
+  use "nvim-treesitter/playground"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
