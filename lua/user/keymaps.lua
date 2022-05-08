@@ -39,6 +39,10 @@ keymap("n", "<C-Right>", ":vertical resize -2<CR>", opts)
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
+-- Intuitive up and down through lines when wrapping is included
+keymap("n", "j", "gj", opts)
+keymap("n", "k", "gk", opts)
+
 -- Insert --
 -- Press jk fast to exit
 keymap("i", "jk", "<ESC>", opts)
