@@ -55,8 +55,9 @@ return packer.startup(function(use)
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "lunarvim/darkplus.nvim"
   use "morhetz/gruvbox"
-  use "catppuccin/nvim"
+  -- use "catppuccin/nvim"
   -- use { 'catppuccin/nvim', branch = 'dev-remaster',} -- if I do this I still don't see the other flavors
+  use("folke/tokyonight.nvim")
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
