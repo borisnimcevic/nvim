@@ -9,10 +9,11 @@ local nmap = Remap.nmap
 nnoremap("<leader>pv","<cmd>Ex<CR>")
 
 -- easier window navigation
-nnoremap("<C-h>", "<C-w>h")
-nnoremap("<C-j>", "<C-w>j")
-nnoremap("<C-k>", "<C-w>k")
-nnoremap("<C-l>", "<C-w>l")
+vim.g.tmux_navigator_no_mappings = 1
+nnoremap("<C-h>", ":TmuxNavigateLeft<cr>")
+nnoremap("<C-j>", ":TmuxNavigateDown<cr>")
+nnoremap("<C-k>", ":TmuxNavigateUp<cr>")
+nnoremap("<C-l>", ":TmuxNavigateRight<cr>")
 
 -- Unmap
 nnoremap("J","<Nop>")

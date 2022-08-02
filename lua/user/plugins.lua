@@ -40,8 +40,16 @@ packer.init {
 
 -- Install your plugins here
 return packer.startup(function(use)
-  -- My plugins here
   use "wbthomason/packer.nvim" -- Have packer manage itself
+
+  -- Colorschemes
+  use "folke/tokyonight.nvim"
+
+  -- Navigation with Tmux
+  use "christoomey/vim-tmux-navigator"
+
+  --[[
+  -- My plugins here
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   -- use "numToStr/Comment.nvim" -- Easily comment stuff
@@ -51,13 +59,11 @@ return packer.startup(function(use)
           require('Comment').setup()
       end
   }
-  -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "lunarvim/darkplus.nvim"
   use "morhetz/gruvbox"
   -- use "catppuccin/nvim"
   -- use { 'catppuccin/nvim', branch = 'dev-remaster',} -- if I do this I still don't see the other flavors
-  use "folke/tokyonight.nvim"
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
@@ -91,4 +97,5 @@ return packer.startup(function(use)
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
+-- ]]
 end)
