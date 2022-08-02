@@ -16,5 +16,5 @@ nnoremap("<C-k>", ":TmuxNavigateUp<cr>")
 nnoremap("<C-l>", ":TmuxNavigateRight<cr>")
 
 -- Unmap
-nnoremap("J","<Nop>")
+nnoremap("<S-j>","<Nop>")
 nnoremap("<Space>", "<Nop>")

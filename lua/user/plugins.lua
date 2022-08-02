@@ -40,14 +40,19 @@ packer.init {
 
 -- Install your plugins here
 return packer.startup(function(use)
-  use "wbthomason/packer.nvim" -- Have packer manage itself
+  use("wbthomason/packer.nvim") -- Have packer manage itself
 
   -- Colorschemes
-  use "folke/tokyonight.nvim"
+  use("folke/tokyonight.nvim")
 
   -- Navigation with Tmux
-  use "christoomey/vim-tmux-navigator"
+  use("christoomey/vim-tmux-navigator")
 
+  -- Treesitter
+  use("nvim-treesitter/nvim-treesitter",{
+    run = ":TSUpdate"
+  })
+  
   --[[
   -- My plugins here
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
@@ -80,11 +85,6 @@ return packer.startup(function(use)
   use "nvim-telescope/telescope.nvim"
   use 'nvim-telescope/telescope-media-files.nvim'
 
-    -- Treesitter
-  use {
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-  }
   use "p00f/nvim-ts-rainbow"
   use "nvim-treesitter/playground"
 
