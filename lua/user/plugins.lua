@@ -44,6 +44,7 @@ return packer.startup(function(use)
 
   -- Colorschemes
   use("folke/tokyonight.nvim")
+  use("ellisonleao/gruvbox.nvim")
 
   -- Navigation with Tmux
   use("christoomey/vim-tmux-navigator")
