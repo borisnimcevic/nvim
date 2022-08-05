@@ -14,6 +14,13 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
     additional_vim_regex_highlighting = false,
   },
+
+  -- for the rainbow parentheses plugin
+  rainbow = {
+    enable = true,
+    extended_mode = true,
+    max_file_lines = nil,
+  },
 }
 --[[
 local status_ok, configs = pcall (require,"nvim-treesitter.configs")

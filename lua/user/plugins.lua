@@ -60,6 +60,12 @@ return packer.startup(function(use)
         require('Comment').setup()
     end
   }
+
+  -- Color the parentheses
+  use("p00f/nvim-ts-rainbow")
+
+
+
   --[[
   -- My plugins here
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
