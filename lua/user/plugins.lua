@@ -65,6 +65,15 @@ return packer.startup(function(use)
   use("p00f/nvim-ts-rainbow")
 
 
+  -- Better "di(" experinece
+  use("wellle/targets.vim")
+
+
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+  if PACKER_BOOTSTRAP then
+    require("packer").sync()
+  end
 
   --[[
   -- My plugins here
@@ -105,10 +114,5 @@ return packer.startup(function(use)
   use 'kyazdani42/nvim-tree.lua'
 
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if PACKER_BOOTSTRAP then
-    require("packer").sync()
-  end
 -- ]]
 end)
