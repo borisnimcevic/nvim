@@ -64,10 +64,19 @@ return packer.startup(function(use)
   -- Color the parentheses
   use("p00f/nvim-ts-rainbow")
 
-
   -- Better "di(" experinece
   use("wellle/targets.vim")
 
+  -- LSP
+  use("neovim/nvim-lspconfig") -- Configurations for Nvim LSP
+
+  -- Completion
+  use("hrsh7th/nvim-cmp") -- engine
+  use("hrsh7th/cmp-nvim-lsp") -- source that goies into the engine
+  use("hrsh7th/cmp-buffer") -- source that goies into the engine
+  use("hrsh7th/cmp-path") -- source that goies into the engine
+  use("L3MON4D3/LuaSnip") -- snippet engine
+  use("saadparwaiz1/cmp_luasnip") -- snippet completions
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
@@ -97,7 +106,6 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-buffer" -- buffer completions
   use "hrsh7th/cmp-path" -- path completions
   use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use "saadparwaiz1/cmp_luasnip" -- snippet completions
 
     -- snippets
   use "L3MON4D3/LuaSnip" --snippet engine
