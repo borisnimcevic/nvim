@@ -15,6 +15,10 @@ nnoremap("<C-j>", ":TmuxNavigateDown<cr>")
 nnoremap("<C-k>", ":TmuxNavigateUp<cr>")
 nnoremap("<C-l>", ":TmuxNavigateRight<cr>")
 
+-- easier tab navigation
+nnoremap("j", "gj")
+nnoremap("k", "gk")
+
 -- Unmap
 nnoremap("<S-j>","<Nop>")
 vnoremap("<S-j>","<Nop>")
