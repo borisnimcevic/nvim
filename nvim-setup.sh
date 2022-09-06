@@ -74,22 +74,12 @@ fi
 echo "Creating new symlink: ${HOME}/.config/nvim"
 ln -s $(pwd) ${destination}
 
+# get packer
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-# get vim plugged
-# sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-#        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
-# install all the Plugs
-# nvim --headless +PlugInstall +qa
-
-# setup coc
-# nvim --headless +"CocInstall coc-clangd" +qa
-# nvim --headless +"CocInstall coc-cmake" +qa
-# nvim --headless +"CocInstall coc-pyright" +qa
-# nvim --headless +"CocInstall coc-sh" +qa
-# nvim --headless +"CocInstall coc-spell-checker" +qa
-#
-# # setup vimspector
-# nvim --headless +"VimspectorInstall vscode-cpptools" +qa
+# install packer plugins
+nvim --headless +"PackerClean" +qa
+nvim --headless +"PackerInstall" +qa
 
 echo "nvim setup done!!!"
