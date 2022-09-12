@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# TODO: is the "#!/bin/bash" necessary?
+# TODO: first download neovim and if that worked add all the paths to the bashrc and zshrc
+
 # install prerequisites
 # sudo apt update
 
@@ -49,13 +52,24 @@ else
 	echo "$BIN_DIR is now created." 
 fi
 
-# add .local/bin/ tothe path if it doesn't exist
-echo $PATH | grep "/.local/bin" &> /dev/null
+#TODO: make all of these in a nicer function so the code is not repeating 
+# if there's bashrc add the path
+grep $BIN_DIR /home/$SUDO_USER/.bashrc &> /dev/null
 if [ $? -ne 0 ]; then
-  echo "Added $BIN_DIR to the PATH."
-  export PATH="/home/$SUDO_USER/.local/bin:$PATH"
+  echo "path to $BIN_DIR not yet added in the bashrc"
+  echo "adding it now.."
+  echo "export PATH=\"$PATH:$BIN_DIR\"" >> /home/$SUDO_USER/.bashrc
 else
-  echo "$BIN_DIR already in the PATH."
+  echo "$BIN_DIR is already in the path in bashrc"
+fi
+
+grep $BIN_DIR /home/$SUDO_USER/.zshrc &> /dev/null
+if [ $? -ne 0 ]; then
+  echo "path to $BIN_DIR not yet added in the zshrc"
+  echo "adding it now.."
+  echo "export PATH=\"$PATH:$BIN_DIR\"" >> /home/$SUDO_USER/.zshrc
+else
+  echo "$BIN_DIR is already in the path in zshrc"
 fi
 
 # install language servers
