@@ -1,5 +1,7 @@
 # TODO: first download neovim and if that worked add all the paths to the bashrc and zshrc
 
+# random edit to test git
+
 # install prerequisites
 if [ $USER != "root" ]; then
 	echo "You need to run this script as a root user."
