@@ -1,3 +1,4 @@
+#!/bin/bash
 # TODO: first download neovim and if that worked add all the paths to the bashrc and zshrc
 
 # random edit to test git
@@ -26,8 +27,9 @@ function install-prog {
   fi
 }
 
+install-prog curl
+install-prog libfuse2
 # install-prog clangd
- install-prog curl
 # install-prog figlet
 # install-prog git
 # install-prog lolcat
@@ -76,43 +78,43 @@ fi
 grep "export EDITOR=\"nvim\"" /home/$SUDO_USER/.bashrc &> /dev/null
 if [ $? -ne 0 ]; then
   echo "settign nvim as the main EDITOR in bashrc"
-  echo "export EDITOR=\"nvim\"" >> $HOME/.bashrc
+  echo "export EDITOR=\"nvim\"" >> /home/$SUDO_USER/.bashrc
 else
   echo "nvim alrady set as the main EDITOR in bashrc"
 fi
 
 grep "export EDITOR=\"nvim\"" /home/$SUDO_USER/.zshrc &> /dev/null
 if [ $? -ne 0 ]; then
-  echo "settign nvim as the main EDITOR in bashrc"
-  echo "export EDITOR=\"nvim\"" >> $HOME/.zshrc
+  echo "settign nvim as the main EDITOR in zshrc"
+  echo "export EDITOR=\"nvim\"" >> home/$SUDO_USER/.zshrc
 else
-  echo "nvim alrady set as the main EDITOR in bashrc"
+  echo "nvim alrady set as the main EDITOR in zshrc"
 fi
 
 # set aliases
 grep "alias v=\"nvim\"" /home/$SUDO_USER/.bashrc &> /dev/null
 if [ $? -ne 0 ]; then
   echo "setting nvim aliases in .bashrc"
-  echo "alias v=\"nvim\"" >> $HOME/.bashrc
+  echo "alias v=\"nvim\"" >> /home/$SUDO_USER/.bashrc
 else
   echo "aliases alrady set in .basrhc"
 fi
 
-grep "alias v=\"nvim\"" /home/$SUDO_USER/.bashrc &> /dev/null
+grep "alias v=\"nvim\"" /home/$SUDO_USER/.zshrc &> /dev/null
 if [ $? -ne 0 ]; then
-  echo "setting nvim aliases in .bashrc"
-  echo "alias v=\"nvim\"" >> $HOME/.bashrc
+  echo "setting nvim aliases in .zshrc"
+  echo "alias v=\"nvim\"" >> /home/$SUDO_USER/.zshrc
 else
-  echo "aliases alrady set in .basrhc"
+  echo "aliases alrady set in .zshrc"
 fi
 
 # make it executable with 'nvim'
-chmod u+x nvim.appimage
+sudo chmod +x nvim.appimage
 sudo mv nvim.appimage $BIN_DIR/nvim
 echo "moved nvim to $BIN_DIR"
 
 # symlink nvim configuration
-destination="home/$SUDO_USER/.config"
+destination="/home/$SUDO_USER/.config"
 dateString=$(date +%Y-%m-%d-%H%M)
 
 if [ -d "${destination}" ]; then
@@ -122,7 +124,8 @@ if [ -d "${destination}" ]; then
 fi
 
 echo "Creating new symlink: ${destination}"
-ln -s $(pwd) ${destination}
+echo "Running ---> ln -s $PWD/.. ${destinatio}"
+ln -s $PWD/.. ${destination}
 
 # get packer
 # git clone --depth 1 https://github.com/wbthomason/packer.nvim\
