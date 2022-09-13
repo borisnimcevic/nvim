@@ -1,17 +1,11 @@
-#!/bin/bash
-
-# TODO: is the "#!/bin/bash" necessary?
 # TODO: first download neovim and if that worked add all the paths to the bashrc and zshrc
 
 # install prerequisites
-# sudo apt update
-
 if [ $USER != "root" ]; then
 	echo "You need to run this script as a root user."
 	echo "Try: sudo ./nvim-setup.sh"
 	exit
 fi
-	
 
 function install-prog {
   # We don't care about the output of this command so we do both, stdout and
@@ -31,7 +25,7 @@ function install-prog {
 }
 
 # install-prog clangd
-# install-prog curl
+ install-prog curl
 # install-prog figlet
 # install-prog git
 # install-prog lolcat
@@ -42,7 +36,11 @@ function install-prog {
 
 # pip3 install neovim
 
-# check if $HOME/.local/bin/ exist
+# download latest stable neovim
+echo "Downloading nvim..." 
+curl -LOf https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
+
+# check if ~/.local/bin/ already exist
 BIN_DIR="/home/$SUDO_USER/.local/bin"
 if [ -d "$BIN_DIR" ]; then
 	echo "$BIN_DIR exist. Great!" 
@@ -52,8 +50,8 @@ else
 	echo "$BIN_DIR is now created." 
 fi
 
-#TODO: make all of these in a nicer function so the code is not repeating 
-# if there's bashrc add the path
+# TODO: make all of these in a nicer function so the code is not repeating 
+# add PATH
 grep $BIN_DIR /home/$SUDO_USER/.bashrc &> /dev/null
 if [ $? -ne 0 ]; then
   echo "path to $BIN_DIR not yet added in the bashrc"
@@ -72,28 +70,47 @@ else
   echo "$BIN_DIR is already in the path in zshrc"
 fi
 
-# install language servers
-# sudo npm i -g bash-language-server
-# pip3 install cmake-language-server
+# set nvim as the main EDITOR
+grep "export EDITOR=\"nvim\"" /home/$SUDO_USER/.bashrc &> /dev/null
+if [ $? -ne 0 ]; then
+  echo "settign nvim as the main EDITOR in bashrc"
+  echo "export EDITOR=\"nvim\"" >> $HOME/.bashrc
+else
+  echo "nvim alrady set as the main EDITOR in bashrc"
+fi
 
-# download latest stable neovim
-# curl -LOf https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
+grep "export EDITOR=\"nvim\"" /home/$SUDO_USER/.zshrc &> /dev/null
+if [ $? -ne 0 ]; then
+  echo "settign nvim as the main EDITOR in bashrc"
+  echo "export EDITOR=\"nvim\"" >> $HOME/.zshrc
+else
+  echo "nvim alrady set as the main EDITOR in bashrc"
+fi
+
+# set aliases
+grep "alias v=\"nvim\"" /home/$SUDO_USER/.bashrc &> /dev/null
+if [ $? -ne 0 ]; then
+  echo "setting nvim aliases in .bashrc"
+  echo "alias v=\"nvim\"" >> $HOME/.bashrc
+else
+  echo "aliases alrady set in .basrhc"
+fi
+
+grep "alias v=\"nvim\"" /home/$SUDO_USER/.bashrc &> /dev/null
+if [ $? -ne 0 ]; then
+  echo "setting nvim aliases in .bashrc"
+  echo "alias v=\"nvim\"" >> $HOME/.bashrc
+else
+  echo "aliases alrady set in .basrhc"
+fi
 
 # make it executable with 'nvim'
 chmod u+x nvim.appimage
-sudo mv nvim.appimage $HOME/.local/bin/nvim
-echo "moved nvim to .local/bin"
-
-# add it as a main editor
-echo "export EDITOR=\"nvim\"" >> $HOME/.bash_profile
-echo "export EDITOR=\"nvim\"" >> $HOME/.zshrc
-
-# make aliases
-echo "alias v=\"nvim\"" >> $HOME/.bashrc
-echo "alias v=\"nvim\"" >> $HOME/.zshrc
+sudo mv nvim.appimage $BIN_DIR/nvim
+echo "moved nvim to $BIN_DIR"
 
 # symlink nvim configuration
-destination="${HOME}/.config"
+destination="home/$SUDO_USER/.config"
 dateString=$(date +%Y-%m-%d-%H%M)
 
 if [ -d "${destination}" ]; then
@@ -102,14 +119,14 @@ if [ -d "${destination}" ]; then
   mv ${destination}{,.${dateString}}
 fi
 
-echo "Creating new symlink: ${HOME}/.config"
+echo "Creating new symlink: ${destination}"
 ln -s $(pwd) ${destination}
 
 # get packer
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+# git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+#  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 # install packer plugins
-nvim --headless +"PackerInstall" +qa
+# nvim --headless +"PackerInstall" +qa
 
 echo "nvim setup done!!!"
