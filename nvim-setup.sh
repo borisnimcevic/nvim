@@ -1,15 +1,13 @@
 #!/bin/bash
-# TODO: first download neovim and if that worked add all the paths to the bashrc and zshrc
 
-# random edit to test git
-
-# install prerequisites
+# root is needed for this script
 if [ $USER != "root" ]; then
 	echo "You need to run this script as a root user."
 	echo "Try: sudo ./nvim-setup.sh"
 	exit
 fi
 
+# install prerequisites
 function install-prog {
   # We don't care about the output of this command so we do both, stdout and
   # stderr, to the void (/dev/null). Why would we run a command, but then 
@@ -29,6 +27,7 @@ function install-prog {
 
 install-prog curl
 install-prog libfuse2
+install-prog build-essential
 # install-prog clangd
 # install-prog figlet
 # install-prog git
@@ -56,65 +55,69 @@ fi
 
 # TODO: make all of these in a nicer function so the code is not repeating 
 # add PATH
-grep $BIN_DIR /home/$SUDO_USER/.bashrc &> /dev/null
+BASHRC_DIR="/home/$SUDO_USER/.bashrc"
+grep $BIN_DIR $BASHRC_DIR &> /dev/null
 if [ $? -ne 0 ]; then
   echo "path to $BIN_DIR not yet added in the bashrc"
   echo "adding it now.."
-  echo "export PATH=\"$PATH:$BIN_DIR\"" >> /home/$SUDO_USER/.bashrc
+  echo "export PATH=\"$PATH:$BIN_DIR\"" >> $BASHRC_DIR
 else
   echo "$BIN_DIR is already in the path in bashrc"
 fi
 
-grep $BIN_DIR /home/$SUDO_USER/.zshrc &> /dev/null
+ZSHRC_DIR="/home/$SUDO_USER/.zshrc"
+grep $BIN_DIR $ZSHRC_DIR &> /dev/null
 if [ $? -ne 0 ]; then
   echo "path to $BIN_DIR not yet added in the zshrc"
   echo "adding it now.."
-  echo "export PATH=\"$PATH:$BIN_DIR\"" >> /home/$SUDO_USER/.zshrc
+  echo "export PATH=\"$PATH:$BIN_DIR\"" >> $ZSHRC_DIR
 else
   echo "$BIN_DIR is already in the path in zshrc"
 fi
 
 # set nvim as the main EDITOR
-grep "export EDITOR=\"nvim\"" /home/$SUDO_USER/.bashrc &> /dev/null
+grep "export EDITOR=\"nvim\"" $BASHRC_DIR &> /dev/null
 if [ $? -ne 0 ]; then
   echo "settign nvim as the main EDITOR in bashrc"
-  echo "export EDITOR=\"nvim\"" >> /home/$SUDO_USER/.bashrc
+  echo "export EDITOR=\"nvim\"" >> $BASHRC_DIR
 else
   echo "nvim alrady set as the main EDITOR in bashrc"
 fi
 
-grep "export EDITOR=\"nvim\"" /home/$SUDO_USER/.zshrc &> /dev/null
+grep "export EDITOR=\"nvim\"" $ZSHRC_DIR &> /dev/null
 if [ $? -ne 0 ]; then
   echo "settign nvim as the main EDITOR in zshrc"
-  echo "export EDITOR=\"nvim\"" >> home/$SUDO_USER/.zshrc
+  echo "export EDITOR=\"nvim\"" >> $ZSHRC_DIR
 else
   echo "nvim alrady set as the main EDITOR in zshrc"
 fi
 
 # set aliases
-grep "alias v=\"nvim\"" /home/$SUDO_USER/.bashrc &> /dev/null
+grep "alias v=\"nvim\"" $BASHRC_DIR &> /dev/null
 if [ $? -ne 0 ]; then
   echo "setting nvim aliases in .bashrc"
-  echo "alias v=\"nvim\"" >> /home/$SUDO_USER/.bashrc
+  echo "alias v=\"nvim\"" >> $BASHRC_DIR
 else
   echo "aliases alrady set in .basrhc"
 fi
 
-grep "alias v=\"nvim\"" /home/$SUDO_USER/.zshrc &> /dev/null
+grep "alias v=\"nvim\"" $ZSHRC_DIR &> /dev/null
 if [ $? -ne 0 ]; then
   echo "setting nvim aliases in .zshrc"
-  echo "alias v=\"nvim\"" >> /home/$SUDO_USER/.zshrc
+  echo "alias v=\"nvim\"" >> $ZSHRC_DIR
 else
   echo "aliases alrady set in .zshrc"
 fi
 
 # make it executable with 'nvim'
-sudo chmod +x nvim.appimage
-sudo mv nvim.appimage $BIN_DIR/nvim
+# sudo chmod +x nvim.appimage
+# sudo mv nvim.appimage $BIN_DIR/nvim
+chmod +x nvim.appimage
+mv nvim.appimage $BIN_DIR/nvim
 echo "moved nvim to $BIN_DIR"
 
 # symlink nvim configuration
-destination="/home/$SUDO_USER/.config"
+destination="/home/$SUDO_USER/.config/nvim"
 dateString=$(date +%Y-%m-%d-%H%M)
 
 if [ -d "${destination}" ]; then
@@ -124,14 +127,14 @@ if [ -d "${destination}" ]; then
 fi
 
 echo "Creating new symlink: ${destination}"
-echo "Running ---> ln -s $PWD/.. ${destinatio}"
-ln -s $PWD/.. ${destination}
+echo "Running ---> ln -s $PWD ${destinatio}"
+ln -s $PWD ${destination}
 
 # get packer
-# git clone --depth 1 https://github.com/wbthomason/packer.nvim\
-#  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ /home/$SUDO_USER/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 # install packer plugins
-# nvim --headless +"PackerInstall" +qa
+nvim --headless +"PackerInstall" +qa
 
 echo "nvim setup done!!!"
