@@ -25,8 +25,9 @@ function install-prog {
   fi
 }
 
-install-prog curl
-install-prog libfuse2
 install-prog build-essential
-install-prog ripgrep
+install-prog curl
 install-prog fd-find
+install-prog fzf
+install-prog libfuse2
+install-prog ripgrep
