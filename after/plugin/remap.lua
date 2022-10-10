@@ -23,3 +23,43 @@ nnoremap("k", "gk")
 nnoremap("<S-j>","<Nop>")
 vnoremap("<S-j>","<Nop>")
 nnoremap("<Space>", "<Nop>")
+
+-- Modes
+--   normal_mode = "n",
+--   insert_mode = "i",
+--   visual_mode = "v",
+--   visual_block_mode = "x",
+--   term_mode = "t",
+--   command_mode = "c",
+
+-- -- Light version
+local opts = { noremap = true, silent = true }
+local term_opts = { silent = true }
+local keymap = vim.api.nvim_set_keymap
+
+-- -- Normal --
+-- Resize with arrows
+keymap("n", "<S-C-Up>", ":resize +2<CR>", opts)
+keymap("n", "<S-C-Down>", ":resize -2<CR>", opts)
+keymap("n", "<S-C-Left>", ":vertical resize -2<CR>", opts)
+keymap("n", "<S-C-Right>", ":vertical resize +2<CR>", opts)
+
+-- Navigate buffers
+keymap("n", "<S-l>", ":bnext<CR>", opts)
+keymap("n", "<S-h>", ":bprevious<CR>", opts)
+
+-- Insert --
+-- Press jk fast to exit
+keymap("i", "jk", "<ESC>", opts)
+keymap("i", "kj", "<ESC>", opts)
+
+-- Visua --
+keymap("v", "p", '"_dP', opts)
+
+-- Terminal --
+-- Better terminal navigation
+keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
+keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
+keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
+keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+
