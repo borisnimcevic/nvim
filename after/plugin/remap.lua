@@ -48,6 +48,9 @@ keymap("n", "<S-C-Right>", ":vertical resize +2<CR>", opts)
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
+-- Insert an empty line
+keymap("n", "<CR>", "o<ESC>", opts)
+
 -- Insert --
 -- Press jk fast to exit
 keymap("i", "jk", "<ESC>", opts)
