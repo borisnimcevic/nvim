@@ -3,7 +3,6 @@ vim.g.mapleader = " "
 local options = {
   -- backup files
   backup = false,
-  swapfile = false,
   undodir = os.getenv("HOME") .. "/.vim/undodir",
   undofile = true,
 
@@ -52,6 +51,7 @@ for key, value in pairs(options) do
   vim.opt[key] = value 
 end
 
+vim.cmd "set nrformats+=alpha"
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
 vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
