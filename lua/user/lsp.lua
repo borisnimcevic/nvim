@@ -11,7 +11,8 @@ require('lspconfig').rust_analyzer.setup {
     vim.keymap.set("n","<leader>df",vim.diagnostic.goto_next, {buffer = 0})
     vim.keymap.set("n","<leader>dp",vim.diagnostic.goto_prev, {buffer = 0})
     vim.keymap.set("n","<leader>rn",vim.lsp.buf.rename, {buffer = 0})
-    vim.keymap.set("n","<leader>f",vim.lsp.buf.format, {buffer = 0})
+    -- vim.keymap.set("n","<leader>f",vim.lsp.buf.format, {buffer = 0})
+    -- vim.keymap.set("n","<leader>f",vim.lsp.buf.format, {buffer = 0, async = true})
   end,
 }
 

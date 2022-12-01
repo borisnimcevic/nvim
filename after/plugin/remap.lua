@@ -6,7 +6,7 @@ local xnoremap = Remap.xnoremap
 local nmap = Remap.nmap
 
 -- open netrw
-nnoremap("<leader>pv","<cmd>Ex<CR>")
+nnoremap("<leader>pv", "<cmd>Ex<CR>")
 
 -- easier window navigation
 vim.g.tmux_navigator_no_mappings = 1
@@ -20,8 +20,8 @@ nnoremap("j", "gj")
 nnoremap("k", "gk")
 
 -- Unmap
-nnoremap("<S-j>","<Nop>")
-vnoremap("<S-j>","<Nop>")
+nnoremap("<S-j>", "<Nop>")
+vnoremap("<S-j>", "<Nop>")
 nnoremap("<Space>", "<Nop>")
 
 -- Modes
@@ -66,3 +66,6 @@ keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
+-- Test remaps
+keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.format { async = true }<cr>", opts)
+-- vim.keymap.set("n","<leader>f",vim.lsp.buf.format, {buffer = 0})
