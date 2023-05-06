@@ -48,10 +48,10 @@ local options = {
 
 
 for key, value in pairs(options) do
-  vim.opt[key] = value 
+  vim.opt[key] = value
 end
 
-vim.cmd "set nrformats+=alpha"
-vim.cmd "set whichwrap+=<,>,[,],h,l"
-vim.cmd [[set iskeyword+=-]]
-vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
+vim.opt.nrformats:append("alpha")
+vim.opt.whichwrap:append("<,>,[,],h,l")
+vim.opt.iskeyword:append("-")
+vim.opt.formatoptions:remove("cro")

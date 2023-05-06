@@ -18,4 +18,26 @@ require('lspconfig').rust_analyzer.setup {
 
 require('lspconfig').clangd.setup {}
 
-require'lspconfig'.sumneko_lua.setup{}
+require'lspconfig'.lua_ls.setup{
+  settings = {
+    Lua = {
+      runtime = {
+        path = vim.split(package.path, ";"),
+      },
+      workspace = {
+        library = {
+          [vim.fn.stdpath("config") .. "/stub"] = true,
+        },
+      },
+    },
+  },
+}
+
+require'lspconfig'.pyright.setup{
+  capabilities = capabilities,
+  on_attach = function()
+    vim.keymap.set("n","gd",vim.lsp.buf.definition, {buffer = 0})
+    vim.keymap.set("n","gt",vim.lsp.buf.type_definition, {buffer = 0})
+    vim.keymap.set("n","gi",vim.lsp.buf.implementation, {buffer = 0})
+  end,
+}

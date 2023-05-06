@@ -50,14 +50,14 @@ return packer.startup(function(use)
   use("christoomey/vim-tmux-navigator")
 
   -- Treesitter
-  use("nvim-treesitter/nvim-treesitter",{
+  use("nvim-treesitter/nvim-treesitter", {
     run = ":TSUpdate"
   })
 
   use {
     'numToStr/Comment.nvim',
     config = function()
-        require('Comment').setup()
+      require('Comment').setup()
     end
   }
 
@@ -77,17 +77,19 @@ return packer.startup(function(use)
   use("hrsh7th/cmp-path") -- source that goies into the engine
   use("L3MON4D3/LuaSnip") -- snippet engine
   use("saadparwaiz1/cmp_luasnip") -- snippet completions
+  use("rafamadriz/friendly-snippets")
+
 
   -- Fuzzy finding
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.0',
-  -- or                            , branch = '0.1.x',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    -- or                            , branch = '0.1.x',
+    requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
   use {
     'nvim-telescope/telescope-fzf-native.nvim',
-    run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' 
+    run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
   }
 
   use {
