@@ -18,7 +18,27 @@ cmp.setup({
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    -- ["<CR>"] = cmp.mapping.confirm({ select = true }),
+
+
+    ["<CR>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        local selected_entry = cmp.get_selected_entry()
+        if selected_entry and selected_entry.completion_item.kind == cmp.lsp.CompletionItemKind.Snippet then
+          cmp.close()
+          vim.cmd("stopinsert")
+          require("luasnip").lsp_expand(selected_entry.completion_item.insertText)
+        else
+          cmp.confirm({ select = true })
+        end
+      else
+        fallback()
+      end
+    end, { "i", "c" }),
+
+
+
+
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
