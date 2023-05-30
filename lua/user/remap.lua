@@ -48,8 +48,10 @@ vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- === LSP ===
 -- Format buffer using lsp
--- vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { buffer = 0 })
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+
+-- Toggle between source and header file
+vim.keymap.set("n", "<leader>s", ":ClangdSwitchSourceHeader<CR>")
 
 -- === MISC MAPPINGS ===
 -- Open netrw with <leader>pv
