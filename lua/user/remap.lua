@@ -72,6 +72,8 @@ vim.keymap.set("n", "<leader><leader>", "<C-^>", opts)
 -- Delete buffer with <leader>bd
 vim.keymap.set("n", "<leader>bd", ":bd<CR>", opts)
 
+-- Toggle NERDTree
+vim.keymap.set("n", "<leader>t", ":NERDTreeToggle<CR>", opts)
 -- === UNMAP ===
 -- Disable the default mapping for Shift+j
 vim.keymap.set("n", "<S-j>", "<Nop>")
