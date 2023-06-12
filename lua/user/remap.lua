@@ -89,6 +89,18 @@ vim.keymap.set("n", "Q", "<nop>")
 -- Insert an empty line below the current line with Enter
 vim.keymap.set("n", "<CR>", "o<ESC>", opts)
 
+-- The following it to restore the basic function in normal mode if
+-- the position is in the quick fix list
+function qf_mappings()
+    local buf = vim.api.nvim_get_current_buf()
+    local opts = { noremap = true, silent = true }
+    vim.api.nvim_buf_set_keymap(buf, "n", "<CR>", "<CR>", opts)
+end
+
+vim.api.nvim_exec([[
+  autocmd FileType qf lua qf_mappings()
+]], false)
+
 -- === INSERT MAPPINGS ===
 -- Use jk or kj to escape from insert mode to normal mode
 vim.keymap.set("i", "jk", "<ESC>", opts)
