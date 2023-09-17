@@ -7,7 +7,7 @@ function ColorMyPencils(color)
 
 end
 
-ColorMyPencils()
+ColorMyPencils("gruvbox")
 
 
 -- vim.g.tokyonight_transparent_sidebar = true
