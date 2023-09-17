@@ -69,9 +69,6 @@ vim.keymap.set("n", "<C-s>", ":w<CR>", opts)
 -- Switch between the last two accessed buffers with <leader><leader>
 vim.keymap.set("n", "<leader><leader>", "<C-^>", opts)
 
--- Delete buffer with <leader>bd
-vim.keymap.set("n", "<leader>bd", ":bd<CR>", opts)
-
 -- Toggle NERDTree
 vim.keymap.set("n", "<leader>t", ":NERDTreeToggle<CR>", opts)
 -- === UNMAP ===
