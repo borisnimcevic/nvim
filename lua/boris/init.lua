@@ -1,2 +1,2 @@
-require("boris.remap")
 require("boris.settings")
+require("boris.remap")
