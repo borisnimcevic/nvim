@@ -1,4 +1,14 @@
-require("user")
+
+
+
+
+
+
+
+
+
+
+-- require("user")
 -- require("luasnip.loaders.from_vscode").lazy_load()
 
-vim.opt.exrc = true
+-- vim.opt.exrc = true
